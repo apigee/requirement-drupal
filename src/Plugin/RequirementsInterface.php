@@ -1,30 +1,13 @@
 <?php
 
-/*
- * Copyright 2019 Google Inc.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License version 2 as published by the
- * Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
- * License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- */
-
-namespace Drupal\profile_requirement\Plugin;
+namespace Drupal\requirements\Plugin;
 
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines an interface for the profile requirement plugin.
+ * Defines an interface for the requirements plugin.
  */
-interface ProfileRequirementInterface {
+interface RequirementsInterface {
 
   /**
    * Returns the ID of the plugin.
@@ -122,10 +105,10 @@ interface ProfileRequirementInterface {
   public function isApplicable(): bool;
 
   /**
-   * Returns TRUE if the profile requirement is met.
+   * Returns TRUE if the requirement is met.
    *
    * @return bool
-   *   TRUE if the profile requirement is met.
+   *   TRUE if the requirement is met.
    */
   public function isCompleted(): bool;
 

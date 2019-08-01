@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_requirements().
+ */
+function requirements_requirements($phase) {
+  $requirements = [];
+
+  if ($phase === 'runtime') {
+    /** @var \Drupal\requirements\Plugin\RequirementsManagerInterface $requirements_manager */
+    $requirements_manager = Drupal::service('plugin.manager.requirements');
+    $severity = REQUIREMENT_INFO;
+    $unmet_requirements = [];
+    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
+    foreach ($requirements_manager->listRequirements() as $requirement) {
+      if (!$requirement->isCompleted()) {
+        $unmet_requirements[$requirement->getId()] = $requirement->getLabel();
+        $severity = $requirement->getSeverity() === 'error' ? REQUIREMENT_ERROR : $severity;
+        $severity = $requirement->getSeverity() === 'warning' && $severity === REQUIREMENT_INFO ? REQUIREMENT_WARNING : $severity;
+      }
+    }
+
+    if (count($unmet_requirements)) {
+      $requirements['requirements'] = [
+        'title' => t('Requirements'),
+        'value' => Link::createFromRoute(t('Requirements report'), 'requirements.report'),
+        'description' => t('The following requirements for have not been met: <strong>@requirements</strong>. <a href=":uri">See the requirements report</a>.', [
+          '@requirements' => implode(', ', $unmet_requirements),
+          ':uri' => Url::fromRoute('requirements.report')->toString(),
+        ]),
+        'severity' => $severity,
+      ];
+    }
+  }
+
+  return $requirements;
+}

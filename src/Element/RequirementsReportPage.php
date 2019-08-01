@@ -1,32 +1,15 @@
 <?php
 
-/*
- * Copyright 2019 Google Inc.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License version 2 as published by the
- * Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
- * License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- */
-
-namespace Drupal\profile_requirement\Element;
+namespace Drupal\requirements\Element;
 
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
- * Creates the profile requirement report page element.
+ * Creates the requirements report page element.
  *
- * @RenderElement("profile_requirement_report_page")
+ * @RenderElement("requirements_report_page")
  */
-class ProfileRequirementReportPage extends RenderElement {
+class RequirementsReportPage extends RenderElement {
 
   /**
    * {@inheritdoc}
@@ -34,7 +17,7 @@ class ProfileRequirementReportPage extends RenderElement {
   public function getInfo() {
     $class = get_class($this);
     return [
-      '#theme' => 'profile_requirement_report_page',
+      '#theme' => 'requirements_report_page',
       '#pre_render' => [
         [$class, 'preRenderRequirements'],
       ],
@@ -49,11 +32,11 @@ class ProfileRequirementReportPage extends RenderElement {
     // Group the requirement by severities.
     $element['#requirements'] = static::getSeverities();
 
-    /** @var \Drupal\profile_requirement\Plugin\ProfileRequirementInterface $requirement */
+    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
     foreach ($requirements as $key => $requirement) {
       if ($requirement->isResolvable()) {
         $element['#requirements'][$requirement->getSeverity()]['requirements'][$key] = [
-          '#type' => 'profile_requirement_report',
+          '#type' => 'requirements_report',
           '#requirement' => $requirement,
         ];
       }

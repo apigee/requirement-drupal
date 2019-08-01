@@ -1,0 +1,49 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_help().
+ */
+function requirements_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name === 'requirements.report') {
+    return '<p>' . t('Here you can find a short overview of requirements and recommendations for this site.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function requirements_theme($existing, $type, $theme, $path) {
+  return [
+    'requirements_report' => [
+      'variables' => [
+        'requirement' => NULL,
+      ],
+    ],
+    'requirements_report_page' => [
+      'variables' => [
+        'requirements' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Preprocesses variables for the requirements-report template.
+ */
+function template_preprocess_requirements_report(&$variables) {
+  /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
+  $requirement = $variables['requirement'];
+
+  $variables['attributes'] = new Attribute();
+  $variables['label'] = $requirement->getLabel();
+  $variables['description'] = $requirement->getDescription();
+  $variables['is_completed'] = $requirement->isCompleted();
+  $variables['severity'] = $requirement->getSeverity();
+  $variables['button'] = $requirement->getActionButton();
+
+  $variables['#attached']['library'][] = 'requirements/requirements_report';
+}
+

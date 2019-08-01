@@ -1,23 +1,6 @@
 <?php
 
-/*
- * Copyright 2019 Google Inc.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License version 2 as published by the
- * Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
- * License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- */
-
-namespace Drupal\profile_requirement\Plugin;
+namespace Drupal\requirements\Plugin;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -26,11 +9,11 @@ use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Plugin\PluginBase;
 
 /**
- * Defines a base class for profile requirement plugins.
+ * Defines a base class for requirements plugins.
  */
-abstract class ProfileRequirementBase extends PluginBase implements ProfileRequirementInterface {
+abstract class RequirementsBase extends PluginBase implements RequirementsInterface {
 
-  use ProfileRequirementTrait;
+  use RequirementsTrait;
   use LoggerChannelTrait;
   use MessengerTrait;
 
@@ -59,7 +42,7 @@ abstract class ProfileRequirementBase extends PluginBase implements ProfileRequi
    * {@inheritdoc}
    */
   public function getForm(): ?String {
-    return $this->pluginDefinition['form'] ?? ProfileRequirementFormBase::class;
+    return $this->pluginDefinition['form'] ?? RequirementsFormBase::class;
   }
 
   /**
@@ -91,7 +74,7 @@ abstract class ProfileRequirementBase extends PluginBase implements ProfileRequi
       return [];
     }
 
-    return Link::createFromRoute($this->getActionButtonLabel(), "profile_requirement.{$this->getId()}", [
+    return Link::createFromRoute($this->getActionButtonLabel(), "requirements.{$this->getId()}", [
       \Drupal::destination()->getAsArray(),
     ], [
       'attributes' => [
@@ -130,7 +113,7 @@ abstract class ProfileRequirementBase extends PluginBase implements ProfileRequi
   public function isResolvable(): bool {
     // TODO: Implement a dependency tree so we can avoid circular dependencies.
     foreach ($this->getDependencies() as $dependency) {
-      if (!$this->getProfileRequirementManager()->createInstance($dependency)->isCompleted()) {
+      if (!$this->getRequirementsManager()->createInstance($dependency)->isCompleted()) {
         return FALSE;
       }
     }

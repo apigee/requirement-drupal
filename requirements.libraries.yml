@@ -1,0 +1,5 @@
+requirements_report:
+  version: VERSION
+  css:
+    theme:
+      css/requirements_report.css: {}

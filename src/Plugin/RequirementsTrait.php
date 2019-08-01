@@ -1,28 +1,11 @@
 <?php
 
-/*
- * Copyright 2019 Google Inc.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License version 2 as published by the
- * Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
- * License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- */
-
-namespace Drupal\profile_requirement\Plugin;
+namespace Drupal\requirements\Plugin;
 
 /**
- * Provides a trait for the profile requirement plugins.
+ * Provides a trait for the requirements plugins.
  */
-trait ProfileRequirementTrait {
+trait RequirementsTrait {
 
   /**
    * The entity type manager.
@@ -67,11 +50,11 @@ trait ProfileRequirementTrait {
   protected $configManager;
 
   /**
-   * The profile requirement manager.
+   * The requirements manager.
    *
-   * @var \Drupal\profile_requirement\Plugin\ProfileRequirementManagerInterface
+   * @var \Drupal\requirements\Plugin\RequirementsManagerInterface
    */
-  protected $profileRequirementManager;
+  protected $requirementManager;
 
   /**
    * The Apigee Edge SDK connector.
@@ -123,17 +106,17 @@ trait ProfileRequirementTrait {
   }
 
   /**
-   * Gets the profile requirement manager.
+   * Gets the requirements manager.
    *
-   * @return \Drupal\profile_requirement\Plugin\ProfileRequirementManagerInterface|mixed
-   *   The profile requirement manager.
+   * @return \Drupal\requirements\Plugin\RequirementsManagerInterface|mixed
+   *   The requirements manager.
    */
-  public function getProfileRequirementManager() {
-    if (!$this->profileRequirementManager) {
-      $this->profileRequirementManager = \Drupal::service('plugin.manager.profile_requirement');
+  public function getRequirementsManager() {
+    if (!$this->requirementManager) {
+      $this->requirementManager = \Drupal::service('plugin.manager.requirements');
     }
 
-    return $this->profileRequirementManager;
+    return $this->requirementManager;
   }
 
   /**

@@ -1,0 +1,6 @@
+{
+  "name": "drupal/requirements",
+  "description": "A Drupal module to that provides modules a way to declare configuration requirements and suggestions.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+"
+}

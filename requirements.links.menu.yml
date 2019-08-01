@@ -1,0 +1,5 @@
+requirements.report:
+  title: 'Requirements report'
+  parent: system.admin_reports
+  description: 'Displays a report of the requirements status.'
+  route_name: requirements.report

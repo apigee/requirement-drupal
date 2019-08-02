@@ -1,0 +1,8 @@
+services:
+  plugin.manager.requirement:
+    class: Drupal\requirement\Plugin\RequirementManager
+    parent: default_plugin_manager
+
+  plugin.manager.requirement_group:
+    class: Drupal\requirement\Plugin\RequirementGroupManager
+    parent: default_plugin_manager

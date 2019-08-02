@@ -1,5 +1,0 @@
-name: Requirements
-description: Provides modules a way to declare configuration requirements and suggestions.
-type: module
-package: Administration
-core: 8.x

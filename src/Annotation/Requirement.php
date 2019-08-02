@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\requirements\Annotation;
+namespace Drupal\requirement\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a requirements annotation object.
+ * Defines a requirement annotation object.
  *
  * @Annotation
  */
-class Requirements extends Plugin {
+class Requirement extends Plugin {
 
   /**
    * The ID of the plugin.
@@ -19,7 +19,7 @@ class Requirements extends Plugin {
   public $id;
 
   /**
-   * The ID of the requirements group plugin it belongs to.
+   * The ID of the requirement group plugin it belongs to.
    *
    * @var string
    */
@@ -68,7 +68,7 @@ class Requirements extends Plugin {
   public $weight;
 
   /**
-   * An array of dependent requirements Ids.
+   * An array of dependent requirement Ids.
    *
    * @var array
    */

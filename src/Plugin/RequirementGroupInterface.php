@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 /**
- * Defines an interface group for the requirements plugin.
+ * Defines an interface group for the requirement plugin.
  */
-interface RequirementsGroupInterface {
+interface RequirementGroupInterface {
 
   /**
    * Returns the ID of the plugin.

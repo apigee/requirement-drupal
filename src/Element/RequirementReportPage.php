@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\requirements\Element;
+namespace Drupal\requirement\Element;
 
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
- * Creates the requirements report page element.
+ * Creates the requirement report page element.
  *
  * @RenderElement("requirements_report_page")
  */
-class RequirementsReportPage extends RenderElement {
+class RequirementReportPage extends RenderElement {
 
   /**
    * {@inheritdoc}
@@ -19,31 +19,31 @@ class RequirementsReportPage extends RenderElement {
     return [
       '#theme' => 'requirements_report_page',
       '#pre_render' => [
-        [$class, 'preRenderRequirements'],
+        [$class, 'preRenderRequirement'],
       ],
     ];
   }
 
   /**
-   * Pre-render callback for requirements.
+   * Pre-render callback for requirement.
    */
-  public static function preRenderRequirements($element) {
-    // Filter only resolvable requirements.
+  public static function preRenderRequirement($element) {
+    // Filter only resolvable requirement.
     $requirements = [];
-    foreach ($element['#requirements'] as $id => $requirement) {
+    foreach ($element['#requirement'] as $id => $requirement) {
       if ($requirement->isResolvable()) {
         $requirements[$id] = $requirement;
       }
     }
 
-    // Group the requirement by requirements group.
-    $element['#requirements'] = static::buildGroups($requirements);
+    // Group the requirement by requirement group.
+    $element['#requirement'] = static::buildGroups($requirements);
 
-    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
+    /** @var \Drupal\requirement\Plugin\RequirementInterface $requirement */
     foreach ($requirements as $key => $requirement) {
       $group_id = $requirement->getGroup() ? $requirement->getGroup()->getId() : '_';
-      $element['#requirements'][$group_id]['severities'][$requirement->getSeverity()]['requirements'][$key] = [
-        '#type' => 'requirements_report',
+      $element['#requirement'][$group_id]['severities'][$requirement->getSeverity()]['requirement'][$key] = [
+        '#type' => 'requirement_report',
         '#requirement' => $requirement,
       ];
     }
@@ -52,13 +52,13 @@ class RequirementsReportPage extends RenderElement {
   }
 
   /**
-   * Returns an array of requirements groups with title and descriptions.
+   * Returns an array of requirement groups with title and descriptions.
    *
    * @return array
-   *   An array of requirements groups.
+   *   An array of requirement groups.
    */
   protected static function buildGroups(array $requirements = []) {
-    /* @var \Drupal\requirements\Plugin\RequirementsInterface[] $requirements */
+    /* @var \Drupal\requirement\Plugin\RequirementInterface[] $requirements */
     $groups = [];
     foreach ($requirements as $requirement) {
       $group = $requirement->getGroup();

@@ -1,0 +1,10 @@
+requirement.report:
+  path: '/admin/reports/requirements'
+  defaults:
+    _controller: '\Drupal\requirement\Controller\RequirementReportController::status'
+    _title: 'Requirements report'
+  requirements:
+    _permission: 'administer site configuration'
+
+route_callbacks:
+  - '\Drupal\requirement\Routing\RequirementRoutes::routes'

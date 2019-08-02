@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -10,18 +10,18 @@ use Drupal\Core\Plugin\PluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines a base class for requirements plugins.
+ * Defines a base class for requirement plugins.
  */
-abstract class RequirementsBase extends PluginBase implements RequirementsInterface {
+abstract class RequirementBase extends PluginBase implements RequirementInterface {
 
-  use RequirementsTrait;
+  use RequirementTrait;
   use LoggerChannelTrait;
   use MessengerTrait;
 
   /**
-   * The requirements group this belongs to.
+   * The requirement group this belongs to.
    *
-   * @var \Drupal\requirements\Plugin\RequirementsGroupInterface
+   * @var \Drupal\requirement\Plugin\RequirementGroupInterface
    */
   protected $requirement_group;
 
@@ -35,9 +35,9 @@ abstract class RequirementsBase extends PluginBase implements RequirementsInterf
   /**
    * {@inheritdoc}
    */
-  public function getGroup():? RequirementsGroupInterface {
+  public function getGroup():? RequirementGroupInterface {
     if (empty($this->requirement_group) && !empty($this->pluginDefinition['group'])) {
-      $groups = $this->getRequirementsGroupManager()->listRequirementsGroups();
+      $groups = $this->getRequirementGroupManager()->listRequirementGroups();
       $group_id = $this->pluginDefinition['group'];
       $this->requirement_group = isset($groups[$group_id]) ? $groups[$group_id] : NULL;
     }
@@ -63,7 +63,7 @@ abstract class RequirementsBase extends PluginBase implements RequirementsInterf
    * {@inheritdoc}
    */
   public function getForm(): ?String {
-    return $this->pluginDefinition['form'] ?? RequirementsFormBase::class;
+    return $this->pluginDefinition['form'] ?? RequirementFormBase::class;
   }
 
   /**
@@ -95,7 +95,7 @@ abstract class RequirementsBase extends PluginBase implements RequirementsInterf
       return [];
     }
 
-    return Link::createFromRoute($this->getActionButtonLabel(), "requirements.{$this->getId()}", [
+    return Link::createFromRoute($this->getActionButtonLabel(), "requirement.{$this->getId()}", [
       \Drupal::destination()->getAsArray(),
     ], [
       'attributes' => [
@@ -134,7 +134,7 @@ abstract class RequirementsBase extends PluginBase implements RequirementsInterf
   public function isResolvable(): bool {
     // TODO: Implement a dependency tree so we can avoid circular dependencies.
     foreach ($this->getDependencies() as $dependency) {
-      if (!$this->getRequirementsManager()->createInstance($dependency)->isCompleted()) {
+      if (!$this->getRequirementManager()->createInstance($dependency)->isCompleted()) {
         return FALSE;
       }
     }

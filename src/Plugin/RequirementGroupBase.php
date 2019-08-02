@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 use Drupal\Core\Plugin\PluginBase;
 
 /**
- * Defines a base class for requirements group plugins.
+ * Defines a base class for requirement group plugins.
  */
-abstract class RequirementsGroupBase extends PluginBase implements RequirementsGroupInterface {
+abstract class RequirementGroupBase extends PluginBase implements RequirementGroupInterface {
 
   /**
    * {@inheritdoc}

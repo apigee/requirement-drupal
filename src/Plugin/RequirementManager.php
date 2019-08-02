@@ -1,44 +1,44 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
-use Drupal\requirements\Annotation\Requirements;
+use Drupal\requirement\Annotation\Requirement;
 
 /**
- * Defines a manager for requirements plugins.
+ * Defines a manager for requirement plugins.
  */
-class RequirementsManager extends DefaultPluginManager implements RequirementsManagerInterface {
+class RequirementManager extends DefaultPluginManager implements RequirementManagerInterface {
 
   /**
    * {@inheritdoc}
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     parent::__construct(
-      'Plugin/Requirements/Requirements',
+      'Plugin/Requirement/Requirement',
       $namespaces,
       $module_handler,
-      RequirementsInterface::class,
-      Requirements::class
+      RequirementInterface::class,
+      Requirement::class
     );
-    $this->alterInfo('requirements_info');
-    $this->setCacheBackend($cache_backend, 'requirements_info_info_plugins');
+    $this->alterInfo('requirement_info');
+    $this->setCacheBackend($cache_backend, 'requirement_info_info_plugins');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function listRequirements(): array {
-    $requirements = [];
+  public function listRequirement(): array {
+    $requirement = [];
     foreach ($this->getDefinitions() as $plugin_id => $definition) {
-      /** @var \Drupal\requirements\Plugin\RequirementsInterface $instance */
+      /** @var \Drupal\requirement\Plugin\RequirementInterface $instance */
       if (($instance = $this->createInstance($plugin_id)) && ($instance->isApplicable())) {
-        $requirements[$plugin_id] = $instance;
+        $requirement[$plugin_id] = $instance;
       }
     }
-    return $requirements;
+    return $requirement;
   }
 
   /**

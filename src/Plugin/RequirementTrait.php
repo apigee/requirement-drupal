@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 /**
- * Provides a trait for the requirements plugins.
+ * Provides a trait for the requirement plugins.
  */
-trait RequirementsTrait {
+trait RequirementTrait {
 
   /**
    * The entity type manager.
@@ -50,16 +50,16 @@ trait RequirementsTrait {
   protected $configManager;
 
   /**
-   * The requirements manager.
+   * The requirement manager.
    *
-   * @var \Drupal\requirements\Plugin\RequirementsManagerInterface
+   * @var \Drupal\requirement\Plugin\RequirementManagerInterface
    */
   protected $requirementManager;
 
   /**
-   * The requirements group manager.
+   * The requirement group manager.
    *
-   * @var \Drupal\requirements\Plugin\RequirementsGroupManagerInterface
+   * @var \Drupal\requirement\Plugin\RequirementGroupManagerInterface
    */
   protected $requirementGroupManager;
 
@@ -106,28 +106,28 @@ trait RequirementsTrait {
   }
 
   /**
-   * Gets the requirements manager.
+   * Gets the requirement manager.
    *
-   * @return \Drupal\requirements\Plugin\RequirementsManagerInterface|mixed
-   *   The requirements manager.
+   * @return \Drupal\requirement\Plugin\RequirementManagerInterface|mixed
+   *   The requirement manager.
    */
-  public function getRequirementsManager() {
+  public function getRequirementManager() {
     if (!$this->requirementManager) {
-      $this->requirementManager = \Drupal::service('plugin.manager.requirements');
+      $this->requirementManager = \Drupal::service('plugin.manager.requirement');
     }
 
     return $this->requirementManager;
   }
 
   /**
-   * Gets the requirements group manager.
+   * Gets the requirement group manager.
    *
-   * @return \Drupal\requirements\Plugin\RequirementsGroupManagerInterface|mixed
-   *   The requirements group manager.
+   * @return \Drupal\requirement\Plugin\RequirementGroupManagerInterface|mixed
+   *   The requirement group manager.
    */
-  public function getRequirementsGroupManager() {
+  public function getRequirementGroupManager() {
     if (!$this->requirementGroupManager) {
-      $this->requirementGroupManager = \Drupal::service('plugin.manager.requirements_group');
+      $this->requirementGroupManager = \Drupal::service('plugin.manager.requirement_group');
     }
 
     return $this->requirementGroupManager;

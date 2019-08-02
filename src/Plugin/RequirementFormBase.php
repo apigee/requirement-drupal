@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,32 +8,32 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a base form for requirements.
+ * Provides a base form for requirement.
  */
-class RequirementsFormBase extends FormBase {
+class RequirementFormBase extends FormBase {
 
   /**
-   * The requirements manager.
+   * The requirement manager.
    *
-   * @var \Drupal\requirements\Plugin\RequirementsManagerInterface
+   * @var \Drupal\requirement\Plugin\RequirementManagerInterface
    */
   protected $requirementManager;
 
   /**
-   * The requirements.
+   * The requirement.
    *
-   * @var \Drupal\requirements\Plugin\RequirementsInterface|null
+   * @var \Drupal\requirement\Plugin\RequirementInterface|null
    */
   protected $requirement;
 
   /**
-   * RequirementsFormBase constructor.
+   * RequirementFormBase constructor.
    *
-   * @param \Drupal\requirements\Plugin\RequirementsManagerInterface $requirements_manager
-   *   The requirements manager.
+   * @param \Drupal\requirement\Plugin\RequirementManagerInterface $requirement_manager
+   *   The requirement manager.
    */
-  public function __construct(RequirementsManagerInterface $requirements_manager) {
-    $this->requirementManager = $requirements_manager;
+  public function __construct(RequirementManagerInterface $requirement_manager) {
+    $this->requirementManager = $requirement_manager;
   }
 
   /**
@@ -41,7 +41,7 @@ class RequirementsFormBase extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('plugin.manager.requirements')
+      $container->get('plugin.manager.requirement')
     );
   }
 
@@ -49,7 +49,7 @@ class RequirementsFormBase extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'requirements_base_form';
+    return 'requirement_base_form';
   }
 
   /**
@@ -67,11 +67,11 @@ class RequirementsFormBase extends FormBase {
         '#type' => 'link',
         '#title' => $this->t('Cancel'),
         '#attributes' => ['class' => ['button']],
-        '#url' => Url::fromRoute('requirements.report'),
+        '#url' => Url::fromRoute('requirement.report'),
       ],
     ];
 
-    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
+    /** @var \Drupal\requirement\Plugin\RequirementInterface $requirement */
     if ($this->requirement = $this->requirementManager->createInstance($requirement_id)) {
       $form = $this->requirement->buildConfigurationForm($form, $form_state);
       $form['#title'] = $this->requirement->getLabel();

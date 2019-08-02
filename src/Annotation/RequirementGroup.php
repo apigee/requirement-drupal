@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\requirements\Annotation;
+namespace Drupal\requirement\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a requirements group annotation object.
+ * Defines a requirement group annotation object.
  *
  * @Annotation
  */
-class RequirementsGroup extends Plugin {
+class RequirementGroup extends Plugin {
 
   /**
    * The ID of the plugin.

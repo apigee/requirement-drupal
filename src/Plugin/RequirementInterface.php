@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\requirements\Plugin;
+namespace Drupal\requirement\Plugin;
 
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines an interface for the requirements plugin.
+ * Defines an interface for the requirement plugin.
  */
-interface RequirementsInterface {
+interface RequirementInterface {
 
   /**
    * Returns the ID of the plugin.
@@ -18,11 +18,11 @@ interface RequirementsInterface {
   public function getId(): string;
 
   /**
-   * Returns the requirements group this belongs to.
+   * Returns the requirement group this belongs to.
    *
-   * @return \Drupal\requirements\Plugin\RequirementsGroupInterface|null
+   * @return \Drupal\requirement\Plugin\RequirementGroupInterface|null
    */
-  public function getGroup():? RequirementsGroupInterface;
+  public function getGroup():? RequirementGroupInterface;
 
   /**
    * Returns the label for the requirement.
@@ -120,7 +120,7 @@ interface RequirementsInterface {
   public function isCompleted(): bool;
 
   /**
-   * Determines if the requirements can be resolved.
+   * Determines if the requirement can be resolved.
    *
    * @return bool
    *   TRUE if requirement can be resolved. FALSE otherwise.

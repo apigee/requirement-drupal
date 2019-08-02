@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Template for requirement report.
+ */
+#}
+{%
+  set classes = [
+    'requirement-report',
+    'requirement-report--' ~ severity,
+    is_completed ? 'requirement-report--completed',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div>
+    <div class="requirement-report__label">{{ label }}</div>
+    {% if description %}
+      <p class="requirement-report__description">{{ description }}</p>
+    {% endif %}
+  </div>
+
+  {% if button and not is_completed %}
+    <div class="requirement-report__operations">
+      {{ button }}
+    </div>
+  {% endif %}
+</div>

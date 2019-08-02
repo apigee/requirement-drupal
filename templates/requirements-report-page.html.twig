@@ -5,11 +5,17 @@
  */
 #}
 {% for requirement in requirements %}
-  {% if requirement.requirements %}
-    <h3 class="requirements-report__heading">{{ requirement.title }}</h3>
+  <fieldset>
+    <legend class="requirements-report_group__heading">{{ requirement.title }}</legend>
+    <p class="requirements-report_group__description">{{ requirement.description }}</p>
+    {% for severity in requirement.severities %}
+      {% if severity.requirements %}
+        <h3 class="requirements-report__heading">{{ severity.title }}</h3>
 
-    {% for requirement in requirement.requirements %}
-      {{ requirement }}
+        {% for requirement in severity.requirements %}
+          {{ requirement }}
+        {% endfor %}
+      {% endif %}
     {% endfor %}
-  {% endif %}
+  </fieldset>
 {% endfor %}

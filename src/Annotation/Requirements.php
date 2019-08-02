@@ -19,6 +19,13 @@ class Requirements extends Plugin {
   public $id;
 
   /**
+   * The ID of the requirements group plugin it belongs to.
+   *
+   * @var string
+   */
+  public $group;
+
+  /**
    * The label for the plugin.
    *
    * @var string

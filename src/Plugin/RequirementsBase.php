@@ -7,6 +7,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Plugin\PluginBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines a base class for requirements plugins.
@@ -18,10 +19,30 @@ abstract class RequirementsBase extends PluginBase implements RequirementsInterf
   use MessengerTrait;
 
   /**
+   * The requirements group this belongs to.
+   *
+   * @var \Drupal\requirements\Plugin\RequirementsGroupInterface
+   */
+  protected $requirement_group;
+
+  /**
    * {@inheritdoc}
    */
   public function getId(): string {
     return $this->pluginDefinition['id'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getGroup():? RequirementsGroupInterface {
+    if (empty($this->requirement_group) && !empty($this->pluginDefinition['group'])) {
+      $groups = $this->getRequirementsGroupManager()->listRequirementsGroups();
+      $group_id = $this->pluginDefinition['group'];
+      $this->requirement_group = isset($groups[$group_id]) ? $groups[$group_id] : NULL;
+    }
+
+    return $this->requirement_group;
   }
 
   /**

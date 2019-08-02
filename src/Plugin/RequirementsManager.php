@@ -17,7 +17,7 @@ class RequirementsManager extends DefaultPluginManager implements RequirementsMa
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     parent::__construct(
-      'Plugin/Requirements',
+      'Plugin/Requirements/Requirements',
       $namespaces,
       $module_handler,
       RequirementsInterface::class,

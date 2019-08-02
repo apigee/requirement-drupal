@@ -57,6 +57,13 @@ trait RequirementsTrait {
   protected $requirementManager;
 
   /**
+   * The requirements group manager.
+   *
+   * @var \Drupal\requirements\Plugin\RequirementsGroupManagerInterface
+   */
+  protected $requirementGroupManager;
+
+  /**
    * Gets the entity type manager.
    *
    * @return \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -110,6 +117,20 @@ trait RequirementsTrait {
     }
 
     return $this->requirementManager;
+  }
+
+  /**
+   * Gets the requirements group manager.
+   *
+   * @return \Drupal\requirements\Plugin\RequirementsGroupManagerInterface|mixed
+   *   The requirements group manager.
+   */
+  public function getRequirementsGroupManager() {
+    if (!$this->requirementGroupManager) {
+      $this->requirementGroupManager = \Drupal::service('plugin.manager.requirements_group');
+    }
+
+    return $this->requirementGroupManager;
   }
 
   /**

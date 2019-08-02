@@ -28,21 +28,50 @@ class RequirementsReportPage extends RenderElement {
    * Pre-render callback for requirements.
    */
   public static function preRenderRequirements($element) {
-    $requirements = $element['#requirements'];
-    // Group the requirement by severities.
-    $element['#requirements'] = static::getSeverities();
-
-    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
-    foreach ($requirements as $key => $requirement) {
+    // Filter only resolvable requirements.
+    $requirements = [];
+    foreach ($element['#requirements'] as $id => $requirement) {
       if ($requirement->isResolvable()) {
-        $element['#requirements'][$requirement->getSeverity()]['requirements'][$key] = [
-          '#type' => 'requirements_report',
-          '#requirement' => $requirement,
-        ];
+        $requirements[$id] = $requirement;
       }
     }
 
+    // Group the requirement by requirements group.
+    $element['#requirements'] = static::buildGroups($requirements);
+
+    /** @var \Drupal\requirements\Plugin\RequirementsInterface $requirement */
+    foreach ($requirements as $key => $requirement) {
+      $group_id = $requirement->getGroup() ? $requirement->getGroup()->getId() : '_';
+      $element['#requirements'][$group_id]['severities'][$requirement->getSeverity()]['requirements'][$key] = [
+        '#type' => 'requirements_report',
+        '#requirement' => $requirement,
+      ];
+    }
+
     return $element;
+  }
+
+  /**
+   * Returns an array of requirements groups with title and descriptions.
+   *
+   * @return array
+   *   An array of requirements groups.
+   */
+  protected static function buildGroups(array $requirements = []) {
+    /* @var \Drupal\requirements\Plugin\RequirementsInterface[] $requirements */
+    $groups = [];
+    foreach ($requirements as $requirement) {
+      $group = $requirement->getGroup();
+      $group_id = $group ? $group->getId() : '_';
+      if (!isset($groups[$group_id])) {
+        $groups[$group_id] = [
+          'title' => $group ? $group->getLabel() : t('Other'),
+          'description' =>$group ? $group->getDescription() : '',
+          'severities' => static::getSeverities(),
+        ];
+      }
+    }
+    return $groups;
   }
 
   /**

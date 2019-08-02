@@ -18,6 +18,13 @@ interface RequirementsInterface {
   public function getId(): string;
 
   /**
+   * Returns the requirements group this belongs to.
+   *
+   * @return \Drupal\requirements\Plugin\RequirementsGroupInterface|null
+   */
+  public function getGroup():? RequirementsGroupInterface;
+
+  /**
    * Returns the label for the requirement.
    *
    * @return string

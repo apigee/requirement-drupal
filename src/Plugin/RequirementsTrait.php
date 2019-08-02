@@ -57,13 +57,6 @@ trait RequirementsTrait {
   protected $requirementManager;
 
   /**
-   * The Apigee Edge SDK connector.
-   *
-   * @var \Drupal\apigee_edge\SDKConnectorInterface
-   */
-  protected $apigeeEdgeSdkConnector;
-
-  /**
    * Gets the entity type manager.
    *
    * @return \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -159,20 +152,6 @@ trait RequirementsTrait {
     }
 
     return $this->configManager;
-  }
-
-  /**
-   * Gets the Apigee Edge SDK connector.
-   *
-   * @return \Drupal\apigee_edge\SDKConnectorInterface|mixed
-   *   The Apigee Edge SDK connector.
-   */
-  public function getApigeeEdgeSdkConnector() {
-    if (!$this->apigeeEdgeSdkConnector) {
-      $this->apigeeEdgeSdkConnector = \Drupal::service('apigee_edge.sdk_connector');
-    }
-
-    return $this->apigeeEdgeSdkConnector;
   }
 
 }

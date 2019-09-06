@@ -1,5 +1,5 @@
 name: Requirement
-description: Gives modules a way to declare configuration requirements and suggestions.
+description: Allows other modules a way to declare configuration requirements and suggestions, and provide solutions to fix them.
 type: module
 package: Administration
 core: 8.x

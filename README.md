@@ -183,3 +183,7 @@ use Drupal\requirement\Plugin\RequirementGroupBase;
 class MyModuleGroup extends RequirementGroupBase {}
 
 ```
+
+## Disclaimer
+
+This is not an officially supported Google product.

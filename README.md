@@ -10,17 +10,16 @@ cannot be automated as part of their installation, either because they require u
 ## Issues, questions and feedback
 
 We encourage anyone with feedback, questions or issues to put in an issue into
-our [GitHub issue queue](https://github.com/apigee/requirement-drupal/issues).
+our [issue queue](https://www.drupal.org/node/add/project-issue/requirement).
 
 ## Contribute
 
 We'd love to accept your patches and contributions to this project. Make sure to read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-Development is happening in our [GitHub repository](https://github.com/apigee/requirement-drupal). The drupal.org issue
-queue is disabled, we use the [GitHub issue queue](https://github.com/apigee/requirement-drupal/issues) instead.
+Development is happening in our [GitHub repository](https://github.com/apigee/requirement-drupal).
 
 ## Installation
 
-Follow standard Drupal instructions on [how to install a module](https://www.drupal.org/node/1897420).
+Install as usual (see https://www.drupal.org/node/1897420 for instructions on how to install a module).
 No additional modules or libraries are required.
 
 ## Usage

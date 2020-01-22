@@ -21,6 +21,7 @@ interface RequirementInterface {
    * Returns the requirement group this belongs to.
    *
    * @return \Drupal\requirement\Plugin\RequirementGroupInterface|null
+   *   The requirement group.
    */
   public function getGroup():? RequirementGroupInterface;
 

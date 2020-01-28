@@ -83,7 +83,7 @@ class RequirementReportPage extends RenderElement {
       if (!isset($groups[$group_id])) {
         $groups[$group_id] = [
           'title' => $group ? $group->getLabel() : t('Other'),
-          'description' =>$group ? $group->getDescription() : '',
+          'description' => $group ? $group->getDescription() : '',
           'severities' => static::getSeverities(),
         ];
       }

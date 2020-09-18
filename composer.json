@@ -1,6 +1,9 @@
 {
-  "name": "drupal/requirement",
-  "description": "A Drupal module to that gives modules a way to declare configuration requirement and suggestions.",
-  "type": "drupal-module",
-  "license": "GPL-2.0-or-later"
+    "name": "drupal/requirement",
+    "description": "A Drupal module to that gives modules a way to declare configuration requirement and suggestions.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^8 || ^9"
+    }
 }
